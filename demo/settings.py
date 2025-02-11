@@ -1,9 +1,11 @@
 from pathlib import Path
+import os
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-4^mqtelfdrk(wzn)*auf$@4s^l)-ohv)+4_p3zo$l(3oa%1+8*"
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ['.vercel.app','127.0.0.1','.now.sh']
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -30,7 +32,7 @@ ROOT_URLCONF = "demo.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, 'myapp/templates')],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -42,6 +44,8 @@ TEMPLATES = [
         },
     },
 ]
+
+# print(os.path.join(BASE_DIR, 'myapp/templates'))
 
 WSGI_APPLICATION = "demo.wsgi.application"
 
@@ -76,5 +80,13 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = "static/"
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build','static')
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
